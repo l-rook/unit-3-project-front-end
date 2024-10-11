@@ -26,13 +26,13 @@ async function show(movieId) {
         console.log(error, "<- problem in movieService")
     }
 }
+
 async function createReview(movieId, reviewFormData) {
     try {
         const response = await fetch (`${BASE_URL}/${movieId}/reviews`, {
-            
             headers: {Authorization: `Bearer ${localStorage.getItem("token")}`, 
-        "Content-Type": "application/json"},
-    body: JSON.stringify(reviewFormData),
+        'Content-Type': 'application/json'},
+        body: JSON.stringify(reviewFormData),
     })
     const data = await response.json()
     return data
@@ -44,6 +44,7 @@ async function createReview(movieId, reviewFormData) {
 async function updateReview(movieId, reviewId, reviewFormData){
     try {
         const response = await fetch(`${BASE_URL}/${movieId}/reviews/${reviewId}`, {
+            method: "PUT",
             headers: {Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json"},
         body: JSON.stringify(reviewFormData),
