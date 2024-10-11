@@ -8,7 +8,7 @@ import SigninForm from './components/SigninForm/SigninForm.jsx';
 
 import MovieList from './components/MovieList/MovieList.jsx';
 import MovieDetails from './components/MovieDetails/MovieDetails.jsx';
-
+import ReviewForm from './components/ReviewForm/ReviewForm.jsx';
 import * as authService from '../src/services/authService.js'; // import the authservice
 import * as movieService from '../src/services/movieService.js'
 
@@ -48,6 +48,7 @@ const App = () => {
             <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/movies" element={<MovieList movies={movies} />} />
             <Route path="/movies/:movieId" element={<MovieDetails />} />
+            <Route path="/movies/:movieId/reviews/:reviewId/edit" element={<ReviewForm />} />
             </>
           ) : (
             <Route path="/" element={<Landing />} />
