@@ -4,6 +4,7 @@ import { AuthedUserContext } from "../../App";
 import { useParams, Link } from "react-router-dom";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import * as movieService from '../../services/movieService'
+import styles from './MovieDetails.module.css'
 
 export default function MovieDetails(props){
     const loggedInUser = useContext(AuthedUserContext)
@@ -39,14 +40,14 @@ export default function MovieDetails(props){
 
 return(
     <>
-    <main>
-        <header>
+    <main className={styles.main}>
+        <header className={styles.header}>
             <h1>{movie.title}</h1>
             <img src={movie.image} alt={movie.title}/>
             <p>Genre: {movie.genre.toUpperCase()}</p>
         </header>
         <p>{movie.description}</p>
-    <section>
+    <section className={styles.section}>
         <h2>Reviews</h2>
         <ReviewForm handleAddReview={handleAddReview}/>
         {!movie.reviews.length && <p>There are no reviews</p>}
@@ -57,12 +58,12 @@ return(
                 <article key={review._id} >
                         <header>
                             <p>{review.authorName}</p>
-                            {loggedInUser && loggedInUser._id === review.author && <button onClick={() => handleDeleteReview(review._id)}>Delete</button>}
-                            {loggedInUser && loggedInUser._id === review.author && <Link to={`/movies/${movieId}/reviews/${review._id}/edit`}>Edit</Link>}
                             <p>{review.title}</p>
                             <p>{review.rating}/5</p>
                         </header>
-                        <p>{review.text}</p> 
+                        <p>{review.text}</p>
+                        {loggedInUser && loggedInUser._id === review.author && <button onClick={() => handleDeleteReview(review._id)} className={styles['delete-button']}>Delete</button>}
+                        {loggedInUser && loggedInUser._id === review.author && <button className={styles['edit-button']}><Link to={`/movies/${movieId}/reviews/${review._id}/edit`}>Edit</Link></button>}
                     </article>
             )
         })}
