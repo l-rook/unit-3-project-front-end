@@ -25,7 +25,7 @@ const NavBar = ({ handleSignout }) => {
           </ul>
         </nav>
       ) : (
-        <nav>
+        <nav className={styles.container}>
           <ul>
             <li>
               <Link to="/signin">Sign In</Link>
