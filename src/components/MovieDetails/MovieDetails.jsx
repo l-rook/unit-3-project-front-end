@@ -42,6 +42,7 @@ return(
     <main>
         <header>
             <h1>{movie.title}</h1>
+            <img src={movie.image} alt={movie.title}/>
             <p>Genre: {movie.genre.toUpperCase()}</p>
         </header>
         <p>{movie.description}</p>
