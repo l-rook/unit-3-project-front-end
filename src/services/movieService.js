@@ -30,6 +30,7 @@ async function show(movieId) {
 async function createReview(movieId, reviewFormData) {
     try {
         const response = await fetch (`${BASE_URL}/${movieId}/reviews`, {
+            method: "POST",
             headers: {Authorization: `Bearer ${localStorage.getItem("token")}`, 
         'Content-Type': 'application/json'},
         body: JSON.stringify(reviewFormData),
