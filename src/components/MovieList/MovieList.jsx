@@ -10,7 +10,7 @@ export default function MovieList({movies}){
                     <header>
                         <h2>{movie.title}</h2>
                     </header>
-                    <p>{movie.text}</p>
+                    <img src={movie.image} alt={movie.title}/>
                 </article>
             </Link>
         )
