@@ -2,23 +2,22 @@
 
 .movieList {
     display: flex;
-    flex-wrap: wrap; /* Ensures movies wrap to the next row if there are too many */
-    gap: 20px; /* Adds space between the movies */
-    justify-content: center; /* Centers the content horizontally */
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
     align-items: center;
 }
 
 .movieItem {
-    flex: 1 1 300px; /* Ensures each movie takes at least 300px width, but can grow */
-    max-width: 300px; /* Prevents each movie from growing larger than 300px */
-    text-align: center; /* Center aligns the content */
+    flex: 1 1 300px; 
+    max-width: 300px; 
+    text-align: center; 
 }
 
 .movieItem img {
-    width: 100%; /* Ensures the image takes full width of the container */
+    width: 100%; 
     max-width: 200px;
-    height: auto; /* Maintains the aspect ratio of the image */
-    border-radius: 10px; /* Optional: Adds rounded corners to the image */
-    
+    height: auto; 
+    border-radius: 10px;   
 }
 

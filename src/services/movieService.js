@@ -68,4 +68,6 @@ async function deleteReview(movieId, reviewId) {
         console.log(error, '<- error in movieService')
     }
 }
+
+
 export { index, show, createReview, updateReview, deleteReview }
