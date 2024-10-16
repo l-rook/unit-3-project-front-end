@@ -10,6 +10,7 @@ export default function MovieDetails(props){
     const loggedInUser = useContext(AuthedUserContext)
 
     const [movie, setMovie ] = useState(null)
+    const [averageRating, setAverageRating] = useState(null);
 
     const {movieId} = useParams()
     console.log(movieId, 'movie ID')
@@ -20,7 +21,12 @@ export default function MovieDetails(props){
             const movieData = await movieService.show(movieId)
             setMovie(movieData)
             console.log(movieData, '<---------------------MovieDetail Useeffect')
+
+            if(movieData.reviews.length){
+                calculateAverageRating(movieData.reviews)
+            }
         }
+
 
         getMovie()
     }, [movieId])
@@ -29,11 +35,33 @@ export default function MovieDetails(props){
         const newReview = await movieService.createReview(movieId, reviewData)
         console.log(newReview,'<--------------------------handleAddReview')
         setMovie(newReview)
+        
+        if (newReview.reviews.length) {
+            calculateAverageRating(newReview.reviews); // Recalculate after adding a review
+        }
     }
 
     async function handleDeleteReview(reviewId){
         const deletedReview = await movieService.deleteReview(movieId, reviewId)
-        setMovie({...movie, reviews: movie.reviews.filter((review) => review._id !== reviewId)})
+        const updatedReviews = movie.reviews.filter((review) => review._id !== reviewId)
+        setMovie({...movie, reviews: updatedReviews})
+        
+        if (updatedReviews.length) {
+            calculateAverageRating(updatedReviews); // Recalculate after deleting a review
+        } else {
+            setAverageRating(null); // No reviews left
+        }
+
+    }
+
+    const calculateAverageRating = (reviews) => {
+        if (!reviews || reviews.length === 0) {
+            setAverageRating(null); // If no reviews, reset the average rating
+            return;
+        }
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const avgRating = totalRating / reviews.length;
+        setAverageRating(avgRating.toFixed(1))
     }
     
     if(!movie) return <main>Loading...</main>
@@ -43,6 +71,7 @@ return(
     <main className={styles.main}>
         <header className={styles.header}>
             <h1>{movie.title}</h1>
+            {averageRating && <p>Average Rating: {averageRating}/5</p>}
             <img src={movie.image} alt={movie.title}/>
             <p>Genre: {movie.genre.toUpperCase()}</p>
         </header>

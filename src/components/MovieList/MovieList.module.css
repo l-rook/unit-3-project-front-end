@@ -20,4 +20,8 @@
     height: auto; 
     border-radius: 10px;   
 }
-
+.movieItem h3 {
+    font-size: 1rem;
+    color: #666;
+    margin: 10px 0;
+}
