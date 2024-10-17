@@ -13,19 +13,12 @@ export default function MovieList({ movies }) {
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     console.log(movies, 'movies')
-    const calculateAverageRating = (reviews) => {
-        if (!reviews || reviews.length === 0) return "No reviews"; 
-        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-        const avgRating = totalRating / reviews.length;
-        return avgRating.toFixed(1);
-    };
     const movieList = filteredMovies.map((movie) => {
         return (
             <Link key={movie._id} to={`/movies/${movie._id}`} className={styles.movieItem}>
                 <article>
                     <header>
                         <h2>{movie.title}</h2>
-                        <h3>Rating: {calculateAverageRating(movie.reviews)}/5</h3>
                     </header>
                     <img src={movie.image} alt={movie.title} />
                 </article>

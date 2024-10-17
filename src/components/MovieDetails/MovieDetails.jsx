@@ -6,7 +6,7 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import * as movieService from '../../services/movieService'
 import styles from './MovieDetails.module.css'
 
-export default function MovieDetails(props){
+export default function MovieDetails(){
     const loggedInUser = useContext(AuthedUserContext)
 
     const [movie, setMovie ] = useState(null)
@@ -43,6 +43,7 @@ export default function MovieDetails(props){
 
     async function handleDeleteReview(reviewId){
         const deletedReview = await movieService.deleteReview(movieId, reviewId)
+        console.log(deletedReview)
         const updatedReviews = movie.reviews.filter((review) => review._id !== reviewId)
         setMovie({...movie, reviews: updatedReviews})
         
